@@ -47,6 +47,8 @@ namespace UnitTests
             catch (System.ArgumentOutOfRangeException e)
             {
                 Assert.IsTrue(true);
+                Assert.IsTrue(e.Message.StartsWith(Math.NegativeArgument));
+                Assert.AreEqual(-1, (int)e.ActualValue);
             }
         }       
         
