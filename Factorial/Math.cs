@@ -10,19 +10,28 @@ namespace Vsite.Pood
     public static class Math
     {
         public const string NegativeArgument = "Argument cannot be negative number";
+        public const string ArgumentTooLarge = "Argument is too large";
         public static long Factorial(int n)
         {
             if (n < 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(n),n, NegativeArgument);
+                throw new ArgumentOutOfRangeException(nameof(n), n, NegativeArgument);
             }
-
-            long result = 1;
-            for (int i = 2; i <= n; ++i)
+            try
             {
-                result *= i;
+
+                long result = 1;
+                for (int i = 2; i <= n; ++i)
+                {
+                    result *= i;
+                }
+                return result;
+
             }
-            return result;
+            catch (OverflowException)
+            {
+                throw new ArgumentOutOfRangeException(nameof(n), n, ArgumentTooLarge);
+            }
         }
     }
 }
